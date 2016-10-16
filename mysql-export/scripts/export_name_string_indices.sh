@@ -12,7 +12,6 @@ mysql -B -h $MYSQL_HOST -u$MYSQL_USER --password=$MYSQL_PASS $MYSQL_DB \
         , REPLACE(REPLACE(REPLACE(accepted_taxon_id, '\r\n', ' '), '\n', ' '), '\t', ' ') AS accepted_taxon_id \
         , REPLACE(REPLACE(REPLACE(classification_path, '\r\n', ' '), '\n', ' '), '\t', ' ') AS classification_path \
         , REPLACE(REPLACE(REPLACE(classification_path_ids, '\r\n', ' '), '\n', ' '), '\t', ' ') AS classification_path_ids \
-        , REPLACE(REPLACE(REPLACE(nomenclatural_code_id, '\r\n', ' '), '\n', ' '), '\t', ' ') AS nomenclatural_code_id \
         , nomenclatural_code_id \
         , REPLACE(REPLACE(REPLACE(local_id, '\r\n', ' '), '\n', ' '), '\t', ' ') AS local_id \
         , REPLACE(REPLACE(REPLACE(classification_path_ranks, '\r\n', ' '), '\n', ' '), '\t', ' ') AS classification_path_ranks \

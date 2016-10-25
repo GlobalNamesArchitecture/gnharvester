@@ -3,7 +3,6 @@ import os.path
 import shutil
 
 from pyspark import SparkContext
-# from pyspark.sql import SparkSession
 from pyspark.sql import SQLContext
 from settings import parse_spark, csvs_dir, mysql_export_dir, empty_uuid
 
@@ -30,13 +29,10 @@ def main():
     cleanup()
 
     sc = SparkContext()
-    # spark = SparkSession(sc)
     sql_context = SQLContext(sc)
     path = os.path.join(mysql_export_dir, "name_strings.tsv")
     df = sql_context.load(source='com.databricks.spark.csv', header='true', inferSchema='true', path=path, quote="щ",
                           delimiter="\t")
-
-    # df = spark.read.csv(os.path.join(mysql_export_dir, "name_strings.tsv"), header=True, quote="", sep="\t")
 
     names = df.rdd.map(lambda x: x["name"])
 

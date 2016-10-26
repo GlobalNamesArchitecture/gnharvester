@@ -33,8 +33,8 @@ def main():
     sc = SparkContext()
     sql_context = SQLContext(sc)
     path = os.path.join(mysql_export_dir, "name_strings.tsv")
-    df = sql_context.load(source='com.databricks.spark.csv', header='true', inferSchema='true', path=path, quote="щ",
-                          delimiter="\t")
+    df = sql_context.load(source='com.databricks.spark.csv', header='true', inferSchema='true', path=path,
+                          quote="\u0000", delimiter="\t")
 
     names = df.rdd.map(lambda x: x["name"])
 

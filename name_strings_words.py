@@ -33,7 +33,7 @@ def main():
     path = os.path.join(mysql_export_dir, "name_strings.tsv")
     df = sql_context.read \
         .format('com.databricks.spark.csv') \
-        .options(header="true", delimiter="\t", quoteMode="NONE", quote=u"\U00000000") \
+        .options(header="true", delimiter="\t", quoteMode="NONE", quote=u"\u0000") \
         .load(path, schema=name_strings_schema)
 
     names = df.rdd.map(lambda x: x["name"])

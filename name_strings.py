@@ -19,10 +19,12 @@ def extract_name_strings_fields(result_json):
     if result_json["parsed"]:
         canonical_name = result_json["canonical_name"]["value"]
         canonical_name_uuid = result_json["canonical_name"]["id"]
+        surrogate = str(result_json["surrogate"])
     else:
         canonical_name = ""
         canonical_name_uuid = str(empty_uuid)
-    return "\t".join([name_string_id, verbatim, canonical_name_uuid, canonical_name])
+        surrogate = "\\N"
+    return "\t".join([name_string_id, verbatim, canonical_name_uuid, canonical_name, surrogate])
 
 
 def main():

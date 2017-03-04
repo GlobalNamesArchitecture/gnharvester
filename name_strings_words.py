@@ -6,6 +6,7 @@ from pyspark import SparkContext
 from pyspark.sql import SQLContext
 from pyspark.sql.types import *
 from settings import parse_spark, csvs_dir, mysql_export_dir
+from unidecode import unidecode
 
 
 def extract_word_indexes(parsed_name_json, word_target):
@@ -13,7 +14,7 @@ def extract_word_indexes(parsed_name_json, word_target):
     name_string_id = parsed_name_json["name_string_id"]
     words_pos = filter(lambda j: j[0] == word_target, parsed_name_json["positions"])
     words = map(lambda word_pos: verbatim[word_pos[1]:word_pos[2]], words_pos)
-    return map(lambda word: "\t".join([word, name_string_id]), words)
+    return map(lambda word: "\t".join([unidecode(word.upper()), name_string_id]), words)
 
 
 def main():

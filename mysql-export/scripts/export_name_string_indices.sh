@@ -16,4 +16,4 @@ mysql -B -h $MYSQL_HOST -u$MYSQL_USER --password=$MYSQL_PASS $MYSQL_DB \
         , REPLACE(REPLACE(REPLACE(local_id, '\r\n', ' '), '\n', ' '), '\t', ' ') AS local_id \
         , REPLACE(REPLACE(REPLACE(classification_path_ranks, '\r\n', ' '), '\n', ' '), '\t', ' ') AS classification_path_ranks \
       FROM name_string_indices AS nsi \
-      JOIN name_strings AS ns ON nsi.name_string_id = ns.id" 1> ../name_string_indices.tsv
+      JOIN name_strings AS ns ON nsi.name_string_id = ns.id" 1> data/mysql-export/name_string_indices.tsv

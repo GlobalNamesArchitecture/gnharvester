@@ -1,8 +1,8 @@
 import uuid
 
-csvs_dir = "csvs"
+csvs_dir = "data/spark"
 
-mysql_export_dir = "mysql-export"
+mysql_export_dir = "data/mysql-export"
 
 namespace = uuid.UUID('90181196-fecf-5082-a4c1-411d4f314cda')
 empty_uuid = uuid.uuid5(namespace, "")

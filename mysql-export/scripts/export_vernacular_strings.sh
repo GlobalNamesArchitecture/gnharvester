@@ -5,4 +5,4 @@ mysql -B -h $MYSQL_HOST -u$MYSQL_USER --password=$MYSQL_PASS $MYSQL_DB \
           id \
         , REPLACE(REPLACE(REPLACE(name, '\r\n', ' '), '\n', ' '), '\t', ' ') as name \
         , uuid \
-        FROM vernacular_strings" 1> ../vernacular_strings.tsv
+        FROM vernacular_strings" 1> data/mysql-export/vernacular_strings.tsv

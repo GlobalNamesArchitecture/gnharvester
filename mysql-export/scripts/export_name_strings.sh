@@ -10,4 +10,4 @@ mysql -B -h $MYSQL_HOST -u$MYSQL_USER --password=$MYSQL_PASS $MYSQL_DB \
         , uuid \
         , has_groups \
         , surrogate \
-        FROM name_strings" 1> ../name_strings.tsv
+        FROM name_strings" 1> data/mysql-export/name_strings.tsv

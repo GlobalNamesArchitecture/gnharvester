@@ -1,0 +1,243 @@
+LOAD CSV
+     FROM '${DATA_CSV}/name_strings.csv'
+       HAVING FIELDS (
+           id
+         , name
+         , canonical_uuid
+         , canonical
+         , surrogate [null if '\N']
+       )
+     INTO postgresql://${POSTGRES}?tablename=name_strings
+       TARGET COLUMNS (
+           id
+         , name
+         , canonical_uuid
+         , canonical
+         , surrogate
+       )
+     WITH    truncate
+           , fields terminated by '\t'
+           , drop indexes
+           , fields not enclosed;
+
+LOAD CSV
+     FROM '${DATA_CSV}/name_string_indices.csv'
+       HAVING FIELDS (
+           data_source_id
+         , name_string_id
+         , url [null if '\N']
+         , taxon_id
+         , global_id [null if '\N']
+         , local_id [null if '\N']
+         , nomenclatural_code_id [null if '\N']
+         , rank [null if '\N']
+         , accepted_taxon_id [null if '\N']
+         , classification_path [null if '\N']
+         , classification_path_ids [null if '\N']
+         , classification_path_ranks
+       )
+     INTO postgresql://${POSTGRES}?tablename=name_string_indices
+       TARGET COLUMNS (
+           data_source_id
+         , name_string_id
+         , url
+         , taxon_id
+         , global_id
+         , local_id
+         , nomenclatural_code_id
+         , rank
+         , accepted_taxon_id
+         , classification_path
+         , classification_path_ids
+         , classification_path_ranks
+       )
+     WITH    truncate
+           , fields terminated by '\t'
+           , drop indexes
+           , fields not enclosed;
+
+LOAD CSV
+     FROM '${DATA_CSV}/data_sources.csv'
+       HAVING FIELDS (
+           id
+         , title
+         , description
+         , logo_url
+         , web_site_url
+         , data_url
+         , refresh_period_days
+         , name_strings_count
+         , data_hash
+         , unique_names_count
+         , created_at
+         , updated_at
+       )
+     INTO postgresql://${POSTGRES}?tablename=data_sources
+       TARGET COLUMNS (
+           id
+         , title
+         , description
+         , logo_url
+         , web_site_url
+         , data_url
+         , refresh_period_days
+         , name_strings_count
+         , data_hash
+         , unique_names_count
+         , created_at
+         , updated_at
+      )
+    WITH   truncate
+         , fields terminated by '\t'
+         , drop indexes
+         , fields not enclosed;
+
+LOAD CSV
+     FROM '${DATA_CSV}/cross_maps.csv'
+       HAVING FIELDS (
+           data_source_id
+         , taxon_id
+         , name_string_id
+         , cm_data_source_id
+         , cm_local_id
+       )
+     INTO postgresql://${POSTGRES}?tablename=cross_maps
+       TARGET COLUMNS (
+           data_source_id
+         , name_string_id
+         , cm_local_id
+         , cm_data_source_id
+         , taxon_id
+       )
+     WITH   truncate
+          , fields terminated by '\t'
+          , drop indexes;
+
+LOAD CSV
+     FROM '${DATA_CSV}/name_strings__author_words.csv'
+       HAVING FIELDS (
+           author_word
+         , name_uuid
+       )
+     INTO postgresql://${POSTGRES}?tablename=name_strings__author_words
+       TARGET COLUMNS (
+           author_word
+         , name_uuid
+       )
+     WITH   truncate
+          , fields terminated by '\t'
+          , drop indexes;
+
+LOAD CSV
+     FROM '${DATA_CSV}/name_strings__genus.csv'
+       HAVING FIELDS (
+           genus
+         , name_uuid
+       )
+     INTO postgresql://${POSTGRES}?tablename=name_strings__genus
+       TARGET COLUMNS (
+           genus
+         , name_uuid
+       )
+     WITH   truncate
+          , fields terminated by '\t'
+          , drop indexes;
+
+LOAD CSV
+     FROM '${DATA_CSV}/name_strings__species.csv'
+       HAVING FIELDS (
+           species
+         , name_uuid
+       )
+     INTO postgresql://${POSTGRES}?tablename=name_strings__species
+       TARGET COLUMNS (
+           species
+         , name_uuid
+       )
+     WITH   truncate
+          , fields terminated by '\t'
+          , drop indexes;
+
+LOAD CSV
+     FROM '${DATA_CSV}/name_strings__subspecies.csv'
+       HAVING FIELDS (
+           subspecies
+         , name_uuid
+       )
+     INTO postgresql://${POSTGRES}?tablename=name_strings__subspecies
+       TARGET COLUMNS (
+           subspecies
+         , name_uuid
+       )
+     WITH   truncate
+          , fields terminated by '\t'
+          , drop indexes;
+
+LOAD CSV
+     FROM '${DATA_CSV}/name_strings__uninomial.csv'
+       HAVING FIELDS (
+           uninomial
+         , name_uuid
+       )
+     INTO postgresql://${POSTGRES}?tablename=name_strings__uninomial
+       TARGET COLUMNS (
+           uninomial
+         , name_uuid
+       )
+     WITH   truncate
+          , fields terminated by '\t'
+          , drop indexes;
+
+LOAD CSV
+     FROM '${DATA_CSV}/name_strings__year.csv'
+       HAVING FIELDS (
+           year
+         , name_uuid
+       )
+     INTO postgresql://${POSTGRES}?tablename=name_strings__year
+       TARGET COLUMNS (
+           year
+         , name_uuid
+       )
+     WITH   truncate
+          , fields terminated by '\t'
+          , drop indexes;
+
+LOAD CSV
+     FROM '${DATA_CSV}/vernacular_strings.csv'
+       HAVING FIELDS (
+           id
+         , name
+       )
+     INTO postgresql://${POSTGRES}?tablename=vernacular_strings
+       TARGET COLUMNS (
+           id
+         , name
+       )
+     WITH   truncate
+          , fields terminated by '\t'
+          , drop indexes;
+
+LOAD CSV
+     FROM '${DATA_CSV}/vernacular_string_indices.csv'
+       HAVING FIELDS (
+           data_source_id
+         , taxon_id
+         , vernacular_string_id
+         , language
+         , locality
+         , country_code
+       )
+     INTO postgresql://${POSTGRES}?tablename=vernacular_string_indices
+       TARGET COLUMNS (
+           data_source_id
+         , taxon_id
+         , vernacular_string_id
+         , language
+         , locality
+         , country_code
+       )
+     WITH   truncate
+          , fields terminated by '\t'
+          , drop indexes;
+
